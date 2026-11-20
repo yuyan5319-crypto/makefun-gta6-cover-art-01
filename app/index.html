@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Vice Cover Lab</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">NV</span>
+    <div>
+      <h1>Neon Vice Cover Lab</h1>
+      <p>Turn one photo into a multi-panel vice-city game cover.</p>
+    </div>
+  </div>
+  <span class="badge">Offline &middot; Canvas 2D &middot; No uploads leave your device</span>
+</header>
+
+<main class="workspace">
+  <aside class="panel controls">
+    <section>
+      <h2>1 &middot; Photo</h2>
+      <label class="drop">
+        <span>Drop in your own photo</span>
+        <input id="fileInput" type="file" accept="image/*">
+      </label>
+      <div class="sample-row">
+        <button type="button" class="chip" data-sample="pier">Sample: The Pier</button>
+        <button type="button" class="chip" data-sample="boulevard">Sample: Boulevard</button>
+      </div>
+      <p id="photoName" class="hint">No photo yet — the lab paints a sunset backdrop.</p>
+    </section>
+
+    <section>
+      <h2>2 &middot; Words</h2>
+      <label>Cover title
+        <input id="titleInput" type="text" maxlength="26" value="Neon Vice">
+      </label>
+      <label>Subtitle line
+        <input id="subInput" type="text" maxlength="44" value="One city. One night. No brakes.">
+      </label>
+      <label>Corner tag
+        <input id="tagInput" type="text" maxlength="18" value="Cover Lab Ed.">
+      </label>
+    </section>
+
+    <section>
+      <h2>3 &middot; Layout &amp; mood</h2>
+      <label>Panel layout
+        <select id="layoutSelect">
+          <option value="hero" selected>Hero + duo (1 big, 2 small)</option>
+          <option value="quad">Quad grid (2 x 2)</option>
+          <option value="tri">Triptych (tall + stack)</option>
+        </select>
+      </label>
+      <label>Colour mood
+        <select id="paletteSelect">
+          <option value="sunset" selected>Vice Sunset</option>
+          <option value="neon">Midnight Neon</option>
+          <option value="gold">Golden Hour</option>
+        </select>
+      </label>
+      <label>Grade strength <span id="gradeVal">70%</span>
+        <input id="gradeInput" type="range" min="0" max="100" value="70">
+      </label>
+    </section>
+
+    <section>
+      <h2>4 &middot; Export size</h2>
+      <div class="size-row" role="radiogroup" aria-label="Export size">
+        <button type="button" class="size-btn is-on" data-size="poster">Poster<br><small>1080 x 1350</small></button>
+        <button type="button" class="size-btn" data-size="square">Square<br><small>1080 x 1080</small></button>
+        <button type="button" class="size-btn" data-size="wide">Wide<br><small>1920 x 1080</small></button>
+      </div>
+      <button id="exportBtn" type="button" class="export">Export PNG</button>
+      <p id="status" class="hint" role="status"></p>
+    </section>
+  </aside>
+
+  <section class="stage">
+    <canvas id="stage" width="1080" height="1350" aria-label="Your generated cover"></canvas>
+    <p class="stage-note">Live preview — every control repaints the cover instantly.</p>
+  </section>
+</main>
+
+<script type="module" src="./src/lab.js"></script>
+</body>
+</html>

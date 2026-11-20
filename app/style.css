@@ -1,0 +1,96 @@
+/* Neon Vice Cover Lab — dark neon editor chrome around the canvas stage. */
+:root {
+  --ink: #0d0616;
+  --panel: #1a0f2b;
+  --panel-2: #241239;
+  --line: #3d2560;
+  --text: #f5eefc;
+  --muted: #b9a8d9;
+  --hot: #ff2e88;
+  --cyan: #22d3ee;
+  --amber: #ffb347;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background:
+    radial-gradient(900px 480px at 85% -10%, rgba(255, 46, 136, 0.25), transparent 60%),
+    radial-gradient(700px 420px at -10% 110%, rgba(34, 211, 238, 0.18), transparent 60%),
+    var(--ink);
+  color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 24px; border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(140deg, var(--hot), #ff7a3d 55%, var(--amber));
+  font-weight: 900; font-size: 20px; color: #fff; letter-spacing: 0.04em;
+  box-shadow: 0 6px 22px rgba(255, 46, 136, 0.45);
+}
+.brand h1 { margin: 0; font-size: 22px; letter-spacing: 0.01em; }
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.badge {
+  border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px;
+  color: var(--muted); font-size: 12px; white-space: nowrap; background: rgba(255,255,255,0.03);
+}
+.workspace {
+  display: grid; grid-template-columns: 320px 1fr; gap: 24px;
+  padding: 24px; max-width: 1440px; margin: 0 auto; align-items: start;
+}
+.panel {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.panel h2 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--amber); }
+.panel section { display: flex; flex-direction: column; gap: 10px; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13px; color: var(--muted); }
+input[type="text"], select {
+  font: inherit; color: var(--text); background: #12081f; border: 1px solid var(--line);
+  border-radius: 8px; padding: 9px 10px; width: 100%;
+}
+input[type="text"]:focus, select:focus { outline: 2px solid var(--cyan); outline-offset: 1px; }
+input[type="range"] { width: 100%; accent-color: var(--hot); }
+.drop {
+  border: 1.5px dashed var(--line); border-radius: 12px; padding: 16px; text-align: center;
+  cursor: pointer; color: var(--text); background: rgba(34, 211, 238, 0.05);
+}
+.drop:hover { border-color: var(--cyan); }
+.drop input { display: none; }
+.sample-row, .size-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip, .size-btn {
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  color: var(--text); background: #12081f; border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px;
+}
+.chip:hover, .size-btn:hover { border-color: var(--hot); }
+.size-btn { border-radius: 10px; text-align: left; line-height: 1.25; }
+.size-btn small { color: var(--muted); font-weight: 500; }
+.size-btn.is-on { border-color: var(--hot); background: rgba(255, 46, 136, 0.14); box-shadow: inset 0 0 0 1px var(--hot); }
+.export {
+  font: inherit; font-weight: 900; font-size: 16px; cursor: pointer; border: 0; border-radius: 10px;
+  padding: 13px; color: #fff; letter-spacing: 0.03em;
+  background: linear-gradient(90deg, var(--hot), #ff7a3d);
+  box-shadow: 0 8px 24px rgba(255, 46, 136, 0.35);
+}
+.export:hover { filter: brightness(1.08); }
+.hint { margin: 0; color: var(--muted); font-size: 12.5px; }
+.stage { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.stage canvas {
+  max-width: 100%; max-height: calc(100vh - 170px); width: auto; height: auto;
+  border-radius: 6px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  background: #160a26;
+}
+.stage-note { margin: 0; color: var(--muted); font-size: 12.5px; }
+@media (max-width: 860px) {
+  .workspace { grid-template-columns: 1fr; }
+  .badge { display: none; }
+}
+/* Screenshot mode: cover only, edge to edge. */
+body.shot-cover .topbar, body.shot-cover .workspace { display: none; }
+body.shot-cover .shot-stage { display: grid; place-items: center; width: 100vw; height: 100vh; }
+.shot-stage { display: none; }
+body.shot-cover .shot-stage canvas { width: 100vw; height: 100vh; display: block; }
